@@ -4,6 +4,10 @@ body {
 }
 
 a {
-    text-decoration:underline;
+    text-decoration: none;
     color: black;
+  }
+  
+  * {
+    box-sizing: border-box;
   }
