@@ -52,8 +52,7 @@ export class SigIn extends React.Component {
           <div className="buttons">
             <CustomButton type="submit"> Sign in </CustomButton>
             <CustomButton onClick={SignInWithGoogle} isGoogleSignIn>
-              {" "}
-              Sign in with Google{" "}
+              Sign in with Google
             </CustomButton>
           </div>
         </form>

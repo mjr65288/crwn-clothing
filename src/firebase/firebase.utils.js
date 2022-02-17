@@ -3,13 +3,40 @@ import "firebase/compat/firestore";
 import "firebase/compat/auth";
 
 const config = {
-  apiKey: "AIzaSyCdHT-AYHXjF7wOrfAchX4PIm3cSj5tn14",
-  authDomain: "crwn-db.firebaseapp.com",
-  databaseURL: "https://crwn-db.firebaseio.com",
-  projectId: "crwn-db",
-  storageBucket: "crwn-db.appspot.com",
-  messagingSenderId: "850995411664",
-  appId: "1:850995411664:web:7ddc01d597846f65",
+  apiKey: "AIzaSyD0inyojFt5293eaNp9KHetOs0wOUgdeSQ",
+  authDomain: "crwn-db-bc60a.firebaseapp.com",
+  projectId: "crwn-db-bc60a",
+  storageBucket: "crwn-db-bc60a.appspot.com",
+  messagingSenderId: "16325441587",
+  appId: "1:16325441587:web:77a043d95b9bf343534b46",
+  measurementId: "G-BXK42EWLZJ"
+};
+
+export const createUserProfileDocument = async (userAuth, additionalData) => {
+  if(!userAuth) return;
+
+  const userRef = firestore.doc(`users/${userAuth.uid}`);
+
+  const snapShot = await userRef.get();
+
+  if (!snapShot.exists) {
+    const { displayName, email } = userAuth;
+    const createdAt = new Date();
+    try {
+      await userRef.set({
+        displayName,
+        email,
+        createdAt,
+        ...additionalData
+      });
+    } catch (error) {
+      console.log('error creating user', error.message);
+    }
+  }
+
+  console.log(snapShot);
+  //console.log(firestore.doc('users/128fdashadu'));
+  return userRef;
 };
 
 firebase.initializeApp(config);
